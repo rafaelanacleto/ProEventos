@@ -7,10 +7,9 @@ namespace ProEventos.API.Controllers;
 [Route("api/[controller]")]
 public class EventoController : ControllerBase
 {  
-    [HttpGet]
-    public Evento Get()
-    {
-       return new Evento() {
+
+    public IEnumerable<Evento> _evento = new Evento[] {
+        new Evento() {
         Id = 1,
         DataEvento = "18/01/2023",
         ImagemURL = "imagem.png",
@@ -18,13 +17,34 @@ public class EventoController : ControllerBase
         Lote = "12",
         QtdPessoas = 2,
         Tema = "Angular 12"
-       };
+       },
+        new Evento() {
+        Id = 2,
+        DataEvento = "22/01/2023",
+        ImagemURL = "imagem.png",
+        Local = "GTI",
+        Lote = "2",
+        QtdPessoas = 22,
+        Tema = "C# 12"
+       }
+    };
+
+    [HttpGet]
+    public IEnumerable<Evento> Get()
+    {
+       return _evento;
+    }
+
+    [HttpGet("{id}")]
+    public Evento GetById(int? id)
+    {
+       return _evento.Where(x => x.Id == id).FirstOrDefault();
     }
 
     [HttpPost]
-    public Evento Post(Evento model)
+    public IEnumerable<Evento> Post(Evento model)
     {
-       return model;
+       return _evento.Append(model);
     }
 
     [HttpPut("{id}")]
