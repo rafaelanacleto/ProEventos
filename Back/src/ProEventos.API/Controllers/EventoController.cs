@@ -19,19 +19,19 @@ public class EventoController : ControllerBase
     [HttpGet]
     public IEnumerable<Evento> Get()
     {
-        return 
+        return _context.Eventos.ToList();
     }
 
     [HttpGet("{id}")]
-    public IEnumerable<Evento> GetById(int? id)
+    public Evento GetById(int? id)
     {
-        return _evento.Where(evento => evento.Id == id);
+        return _context.Eventos.FirstOrDefault(evento => evento.Id == id);
     }
 
     [HttpPost]
     public IEnumerable<Evento> Post(Evento model)
     {
-        return _evento.Append(model);
+        return _context.Eventos.Append(model);
     }
 
     [HttpPut("{id}")]
