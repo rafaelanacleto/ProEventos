@@ -3,3 +3,8 @@
 </p>
 
 <h1>Eventos componentes</h1>
+<ul>
+  <li *ngFor="let evento of eventos; index as i" >
+     ({{i}}/{{eventos.length}})    -   {{evento.Tema}} - {{evento.Local}} - {{evento.Quantidade}}
+  </li>
+</ul>
