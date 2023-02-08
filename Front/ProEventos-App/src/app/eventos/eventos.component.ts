@@ -8,11 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventosComponent implements OnInit {
 
-  public eventos : any;
+  public eventos: any;
 
   constructor(private http: HttpClient) {
 
-   }
+  }
 
   ngOnInit() {
     this.getEventos();
@@ -20,14 +20,14 @@ export class EventosComponent implements OnInit {
 
   public getEventos(): any {
 
-      this.http.get('http://localhost:5000/api/Evento')
-        .subscribe(
-          {
-            next: (v) => this.eventos = v,
-            error: (e) => console.log(e),
-            complete: () => console.info('complete')
-          }
-        );
+    this.http.get('http://localhost:5000/api/Evento')
+      .subscribe(
+        {
+          next: (v) => this.eventos = v,
+          error: (e) => console.log(e),
+          complete: () => console.info('complete')
+        }
+      );
   }
 
 }
