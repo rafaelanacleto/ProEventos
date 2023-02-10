@@ -1,19 +1,10 @@
-<p>eventos works! - Rafael Ferreira Anacleto</p>
+<h2>Eventos componentes</h2>
 
-<h1>Eventos componentes</h1>
-<ul>
-  <li *ngFor="let evento of eventos; index as i">
-    ({{ i }}/{{ eventos.length }}) - {{ evento.tema }} - {{ evento.local }} -
-    {{ evento.qtdPessoas }}
-  </li>
-</ul>
+<form action="" class="form-inline">
+   <div class="form-group mb-2">
+    <input type="text" class="form-control mr-2" placeholder="buscar">
+    <button class="btn btn-outline-success">OK</button>
+   </div>
+</form>
 
-<hr />
 
-<button
-  type="button"
-  class="btn btn-primary"
-  tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
->
-  Simple demo
-</button>
