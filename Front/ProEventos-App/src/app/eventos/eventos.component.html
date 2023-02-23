@@ -25,11 +25,7 @@
 
     </tr>
   </thead>
-<<<<<<< HEAD
   <tbody *ngIf="eventos && eventos.length > 0">
-=======
-  <tbody *ngIf="eventos && eventos.length">
->>>>>>> 1be85f843b004e6e1498ba3f8d6d70af137c60d9
     <tr *ngFor="let item of eventos; index as i; first as isFirst">
       <th scope="row">{{item.id}}</th>
       <td>{{item.local}}</td>
@@ -41,17 +37,10 @@
       <td><button class="btn btn-outline-success">OK</button></td>
     </tr>
   </tbody>
-<<<<<<< HEAD
-  <tfoot *ngIf="!eventos.length">
-    <tr>
-      <td colspan="8" class="text-center">
-        <h4>Nenhum Evento Encontrado</h4>
-=======
   <tfoot *ngIf="!eventos">
     <tr>
       <td colspan="8" class="text-center text-warning">
         <h4>Nenhum Evento Econtrado</h4>
->>>>>>> 1be85f843b004e6e1498ba3f8d6d70af137c60d9
       </td>
     </tr>
   </tfoot>
