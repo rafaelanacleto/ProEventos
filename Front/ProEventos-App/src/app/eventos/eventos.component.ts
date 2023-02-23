@@ -9,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class EventosComponent implements OnInit {
 
   public eventos: any = [];
+  larguraImagem: number = 50;
+  margemImagem: number = 0.5;
+  mostrarImagem: boolean = false;
 
   constructor(private http: HttpClient) {
 
@@ -28,6 +31,16 @@ export class EventosComponent implements OnInit {
           complete: () => console.info('complete')
         }
       );
+  }
+
+
+  public onToggleImage(): any {
+
+    if (this.mostrarImagem) {
+      this.mostrarImagem = false;
+    }else {
+      this.mostrarImagem = true;
+    }
   }
 
 }

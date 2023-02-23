@@ -15,7 +15,8 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col"><button type="button" class="btn btn-outline-info">Imagem</button></th>
+      <th scope="col"><button type="button" (click)="onToggleImage()" class="btn btn-outline-info">
+        {{!mostrarImagem ? 'Mostrar' : 'Ocultar'}}</button></th>
       <th scope="col">Local</th>
       <th scope="col">Data Evento</th>
       <th scope="col">Tema</th>
@@ -29,7 +30,17 @@
   <tbody *ngIf="eventos && eventos.length > 0">
     <tr *ngFor="let item of eventos; index as i; first as isFirst">
       <th scope="row">{{item.id}}</th>
-      <td><img src="/assets/{{item.imagemURL}}" alt="img" class="img-thumbnail rounded float-left" width="50px"></td>
+      <td>
+        <div *ngIf="mostrarImagem">
+          <img
+          src="/assets/{{item.imagemURL}}"
+          alt="img"
+          class="img-thumbnail rounded float-left"
+          width="50px"
+          [style.width.px]="larguraImagem"
+          [style.margin.px]="margemImagem">
+        </div>
+      </td>
       <td>{{item.local}}</td>
       <td>{{item.dataEvento | date}}</td>
       <td>{{item.tema}}</td>
