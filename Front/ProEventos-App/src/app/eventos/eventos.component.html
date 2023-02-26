@@ -3,7 +3,10 @@
 <form action="">
   <div class="row g-3">
     <div class="col-sm-7">
-      <input type="text" class="form-control col-sm-7" placeholder="buscar">
+      <input
+        type="text"
+        class="form-control col-sm-7"
+        placeholder="buscar">
     </div>
     <div class="col-sm">
       <button class="btn btn-outline-success col-sm">Buscar!</button>
@@ -14,9 +17,9 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col"><button type="button" (click)="onToggleImage()" class="btn btn-outline-info">
         {{!mostrarImagem ? 'Mostrar' : 'Ocultar'}}</button></th>
+      <th scope="col">#</th>
       <th scope="col">Local</th>
       <th scope="col">Data Evento</th>
       <th scope="col">Tema</th>
@@ -29,18 +32,17 @@
   </thead>
   <tbody *ngIf="eventos && eventos.length > 0">
     <tr *ngFor="let item of eventos; index as i; first as isFirst">
-      <th scope="row">{{item.id}}</th>
       <td>
         <div *ngIf="mostrarImagem">
           <img
           src="/assets/{{item.imagemURL}}"
           alt="img"
           class="img-thumbnail rounded float-left"
-          width="50px"
           [style.width.px]="larguraImagem"
           [style.margin.px]="margemImagem">
         </div>
       </td>
+      <th scope="row">{{item.id}}</th>
       <td>{{item.local}}</td>
       <td>{{item.dataEvento | date}}</td>
       <td>{{item.tema}}</td>
