@@ -6,13 +6,15 @@
       <input
         type="text"
         class="form-control col-sm-7"
-        placeholder="buscar">
+        placeholder="Filtrar por Tema e Local"
+        (input)="filtrarEventos($event.target)">
     </div>
     <div class="col-sm">
       <button class="btn btn-outline-success col-sm">Buscar!</button>
     </div>
   </div>
 </form>
+<h3>Filtro: {{filtroLista}}</h3>
 <hr>
 <table class="table">
   <thead>
