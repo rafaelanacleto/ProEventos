@@ -14,7 +14,7 @@ export class EventosComponent implements OnInit {
   larguraImagem: number = 50;
   margemImagem: number = 0.5;
   mostrarImagem: boolean = false;
-  @Input() filtroLista : string = '';
+  private _filtroLista : string = '';
 
   constructor(private http: HttpClient) {
   }
@@ -46,9 +46,9 @@ export class EventosComponent implements OnInit {
     }
   }
 
-  setValue(para : string) {
-    this.filtroLista = para;
-    this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
+  public set filtroLista(para : string) {
+    this._filtroLista = para;
+    this.eventos = this._filtroLista ? this.filtrarEventos(this._filtroLista) : this.eventos;
   }
 
   filtrarEventos(filtroLista: any): void {
@@ -59,8 +59,8 @@ export class EventosComponent implements OnInit {
     )
   }
 
-  getValue() {
-    return this.filtroLista;
+  public get filtroLista() {
+    return this._filtroLista;
   }
 
 }

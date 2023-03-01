@@ -7,14 +7,16 @@
         type="text"
         class="form-control col-sm-7"
         placeholder="Filtrar por Tema e Local"
-        (input)="filtrarEventos($event.target)">
+        name="filtro"
+        [(ngModel)] = "filtroLista">
     </div>
     <div class="col-sm">
       <button class="btn btn-outline-success col-sm">Buscar!</button>
     </div>
   </div>
 </form>
-<h3>Filtro: {{filtroLista}}</h3>
+<hr>
+<h4>Filtro: <span class="badge rounded-pill bg-info text-dark">{{filtroLista}}</span></h4>
 <hr>
 <table class="table">
   <thead>
@@ -22,14 +24,12 @@
       <th scope="col"><button type="button" (click)="onToggleImage()" class="btn btn-outline-info">
         {{!mostrarImagem ? 'Mostrar' : 'Ocultar'}}</button></th>
       <th scope="col">#</th>
+      <th scope="col">Tema</th>
       <th scope="col">Local</th>
       <th scope="col">Data Evento</th>
-      <th scope="col">Tema</th>
       <th scope="col">Qtd Pessoas</th>
       <th scope="col">Lote</th>
-
       <th scope="col">Opções</th>
-
     </tr>
   </thead>
   <tbody *ngIf="eventos && eventos.length > 0">
@@ -45,12 +45,11 @@
         </div>
       </td>
       <th scope="row">{{item.id}}</th>
+      <td>{{item.tema}}</td>
       <td>{{item.local}}</td>
       <td>{{item.dataEvento | date}}</td>
-      <td>{{item.tema}}</td>
       <td>{{item.qtdPessoas}}</td>
       <td>{{item.lote}}</td>
-
       <td><button class="btn btn-outline-success">OK</button></td>
     </tr>
   </tbody>
