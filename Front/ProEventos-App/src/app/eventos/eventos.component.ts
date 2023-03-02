@@ -10,7 +10,7 @@ import { Eventos } from '../_models/Eventos.ts';
 export class EventosComponent implements OnInit {
 
   public eventos: any = [];
-  eventosFiltrados: Eventos[] = [];
+  public eventosFiltrados: any = [];
   larguraImagem: number = 50;
   margemImagem: number = 0.5;
   mostrarImagem: boolean = false;
@@ -23,15 +23,12 @@ export class EventosComponent implements OnInit {
     this.getEventos();
   }
 
-  public getEventos(): any {
+  public getEventos(): void {
 
     this.http.get('http://localhost:5000/api/Evento')
       .subscribe(
-        {
-          next: (v) => this.eventos = v,
-          error: (e) => console.log(e),
-          complete: () => this.eventosFiltrados = this.eventos
-        }
+        response => {this.eventos = response, this.eventosFiltrados = response},
+        error => console.log(error)
       );
   }
 
@@ -44,19 +41,12 @@ export class EventosComponent implements OnInit {
     }
   }
 
-  filtrarEventos(filtroLista: string): void {
-
-    filtroLista = filtroLista.toLocaleLowerCase();
-
-    if(!filtroLista)
-    {
-      return this.eventos;
-    }
-    else{
-      return this.eventos.filter(
-        (evento: { tema: string; }) => evento.tema.toLocaleLowerCase().indexOf(filtroLista) !== -1
-      )
-    }
+  filtrarEventos(filtrarPor : string): any {
+    filtrarPor = filtrarPor.toLocaleLowerCase();
+    return this.eventos.filter(
+      (evento: { tema: string; local: string; }) => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
+      evento.local.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+    );
   }
 
   public get filtroLista(): string {
@@ -65,7 +55,7 @@ export class EventosComponent implements OnInit {
 
   public set filtroLista(para : string) {
     this._filtroLista = para;
-    this.eventos = this._filtroLista ? this.filtrarEventos(this._filtroLista) : this.eventos;
+    this.eventosFiltrados = this._filtroLista ? this.filtrarEventos(this._filtroLista) : this.eventos;
   }
 
 }

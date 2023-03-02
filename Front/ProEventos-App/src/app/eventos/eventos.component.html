@@ -1,8 +1,9 @@
-<h2>Eventos componentes</h2>
-
+<br>
+<h2>Eventos</h2>
+<br>
 <form action="">
   <div class="row g-3">
-    <div class="col-sm-7">
+    <div class="col-sm-8">
       <input
         type="text"
         class="form-control col-sm-7"
@@ -10,13 +11,12 @@
         name="filtro"
         [(ngModel)] = "filtroLista">
     </div>
-    <div class="col-sm">
-      <button class="btn btn-outline-success col-sm">Buscar!</button>
+    <div class="col-sm-4">
+      <h4>Filtro: <span class="badge rounded-pill bg-info text-dark">{{filtroLista}}</span></h4>
     </div>
+
   </div>
 </form>
-<hr>
-<h4>Filtro: <span class="badge rounded-pill bg-info text-dark">{{filtroLista}}</span></h4>
 <hr>
 <table class="table">
   <thead>
@@ -32,8 +32,8 @@
       <th scope="col">Opções</th>
     </tr>
   </thead>
-  <tbody *ngIf="eventos && eventos.length > 0">
-    <tr *ngFor="let item of eventos; index as i; first as isFirst">
+  <tbody *ngIf="eventos">
+    <tr *ngFor="let item of eventosFiltrados; index as i; first as isFirst">
       <td>
         <div *ngIf="mostrarImagem">
           <img
@@ -50,7 +50,11 @@
       <td>{{item.dataEvento | date}}</td>
       <td>{{item.qtdPessoas}}</td>
       <td>{{item.lote}}</td>
-      <td><button class="btn btn-outline-success">OK</button></td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm"><i-bs name="alarm-fill"></i-bs></button>
+        <button type="button" class="btn btn-warning btn-sm">Warning</button>
+        <button type="button" class="btn btn-danger btn-sm">Danger</button>
+      </td>
     </tr>
   </tbody>
   <tfoot *ngIf="!eventos">
@@ -61,3 +65,4 @@
     </tr>
   </tfoot>
 </table>
+
