@@ -33,8 +33,6 @@ export class EventosComponent implements OnInit {
           complete: () => this.eventosFiltrados = this.eventos
         }
       );
-
-      this.eventosFiltrados = this.eventos;
   }
 
   public onToggleImage(): any {
@@ -46,21 +44,28 @@ export class EventosComponent implements OnInit {
     }
   }
 
-  public set filtroLista(para : string) {
-    this._filtroLista = para;
-    this.eventos = this._filtroLista ? this.filtrarEventos(this._filtroLista) : this.eventos;
-  }
-
-  filtrarEventos(filtroLista: any): void {
+  filtrarEventos(filtroLista: string): void {
 
     filtroLista = filtroLista.toLocaleLowerCase();
 
-    return this.eventos.filter((evento: { tema: string; }) => evento.tema.toLocaleLowerCase().indexOf(filtroLista) !== -1
-    )
+    if(!filtroLista)
+    {
+      return this.eventos;
+    }
+    else{
+      return this.eventos.filter(
+        (evento: { tema: string; }) => evento.tema.toLocaleLowerCase().indexOf(filtroLista) !== -1
+      )
+    }
   }
 
-  public get filtroLista() {
+  public get filtroLista(): string {
     return this._filtroLista;
+  }
+
+  public set filtroLista(para : string) {
+    this._filtroLista = para;
+    this.eventos = this._filtroLista ? this.filtrarEventos(this._filtroLista) : this.eventos;
   }
 
 }
