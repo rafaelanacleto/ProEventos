@@ -2,7 +2,7 @@ using ProEventos.Domain.Models;
 
 namespace ProEventos.Persistence.Repositories
 {
-    public interface IProEventosPersistence
+    public interface IPalestrantePersist
     {
          //PALESTRANTE
          Task<Palestrante[]> GetAllPalestranteAsyncByName(string nome, bool includeEventos);
