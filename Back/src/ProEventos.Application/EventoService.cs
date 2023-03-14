@@ -44,7 +44,7 @@ namespace ProEventos.Application
                 if (evento == null)
                     return false;
 
-                _geralPErsist.Update<Evento>(model);
+                _geralPErsist.Delete<Evento>(evento);
 
                 if (await _geralPErsist.SaveChangesAsync())
                 {
