@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ProEventos.Domain.Models;
 using ProEventos.Persistence.Context;
+using ProEventos.Application;
+using ProEventos.Application.Contratos;
 
 namespace ProEventos.API.Controllers;
 
@@ -9,23 +11,45 @@ namespace ProEventos.API.Controllers;
 public class EventoController : ControllerBase
 {
 
-    private readonly ProEventosContext _context;
+    private readonly IEventosService _service;
 
-    public EventoController(ProEventosContext context)
+    public EventoController(IEventosService service)
     {
-        _context = context;
+        _service = service;
     }
 
     [HttpGet]
-    public IEnumerable<Evento> Get()
+    public async Task<IActionResult> Get()
     {
-        return _context.Eventos.ToList();
+        try
+        {
+            var eventos = await _service.GetAllEventoAsync(true);
+            if (eventos == null) return NotFound("Nenhum Evento Encontrado.");
+
+            return Ok(eventos);
+        }
+        catch (Exception ex)
+        {
+            return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                $"Erro ao tentar enviar o erro, ERRO: {ex.Message}");
+        }
     }
 
     [HttpGet("{id}")]
-    public Evento GetById(int? id)
+    public async Task<IActionResult> GetById(int id)
     {
-        return _context.Eventos.FirstOrDefault(evento => evento.Id == id);
+         try
+        {
+            var eventos = await _service.GetAllEventoAsyncById(id, true);
+            if (eventos == null) return NotFound("Nenhum Evento Encontrado.");
+
+            return Ok(eventos);
+        }
+        catch (Exception ex)
+        {
+            return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                $"Erro ao tentar enviar o erro, ERRO: {ex.Message}");
+        }
     }
 
     [HttpPost]
