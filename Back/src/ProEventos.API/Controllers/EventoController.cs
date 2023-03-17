@@ -30,7 +30,7 @@ public class EventoController : ControllerBase
         }
         catch (Exception ex)
         {
-            return this.StatusCode(StatusCodes.Status500InternalServerError, 
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
                 $"Erro ao tentar enviar o erro, ERRO: {ex.Message}");
         }
     }
@@ -38,7 +38,7 @@ public class EventoController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-         try
+        try
         {
             var eventos = await _service.GetAllEventoAsyncById(id, true);
             if (eventos == null) return NotFound("Nenhum Evento Encontrado.");
@@ -47,26 +47,76 @@ public class EventoController : ControllerBase
         }
         catch (Exception ex)
         {
-            return this.StatusCode(StatusCodes.Status500InternalServerError, 
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Erro ao tentar enviar o erro, ERRO: {ex.Message}");
+        }
+    }
+
+    [HttpGet("{tema}")]
+    public async Task<IActionResult> GetByTema(string tema)
+    {
+        try
+        {
+            var eventos = await _service.GetAllEventoAsyncByTema(tema, true);
+            if (eventos == null) return NotFound("Nenhum Evento Encontrado.");
+
+            return Ok(eventos);
+        }
+        catch (Exception ex)
+        {
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
                 $"Erro ao tentar enviar o erro, ERRO: {ex.Message}");
         }
     }
 
     [HttpPost]
-    public IEnumerable<Evento> Post(Evento model)
+    public async Task<IActionResult> Post(Evento model)
     {
-        return _context.Eventos.Append(model);
+        try
+        {
+            var eventos = await _service.AddEventos(model);
+            if (eventos == null) return BadRequest("Nenhum Evento Encontrado.");
+
+            return Ok(eventos);
+        }
+        catch (Exception ex)
+        {
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Erro ao tentar Inserir um novo evento, ERRO: {ex.Message}");
+        }
     }
 
     [HttpPut("{id}")]
-    public string Put(int id)
+    public async Task<IActionResult> Put(int id, Evento model)
     {
-        return $"Put - {id}";
+        try
+        {
+            var eventos = await _service.UpdateEvento(id, model);
+            if (eventos == null) return BadRequest("Nenhum Evento Encontrado.");
+
+            return Ok(eventos);
+        }
+        catch (Exception ex)
+        {
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Erro ao tentar Alterar um evento, ERRO: {ex.Message}");
+        }
     }
 
     [HttpDelete("{id}")]
-    public string Delete(int id)
+    public async Task<IActionResult> Delete(int id, Evento model)
     {
-        return $"Delete - {id}";
+        try
+        {
+            var eventos = await _service.DeleteEvento(id, model);
+            if (eventos == null) return BadRequest("Nenhum Evento Encontrado.");
+
+            return Ok(eventos);
+        }
+        catch (Exception ex)
+        {
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Erro ao tentar Deletar um evento, ERRO: {ex.Message}");
+        }
     }
 }
