@@ -13,7 +13,7 @@ namespace ProEventos.Persistence
         public PalestrantePersistence(ProEventosContext context)
         {
             _context = context;
-            //this._context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         public void Add<T>(T entity) where T : class
