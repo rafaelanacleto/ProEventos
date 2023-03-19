@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { Eventos } from '../_models/Eventos.ts';
+import { Evento } from '../models/Evento';
 
 @Component({
   selector: 'app-eventos',
