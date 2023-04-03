@@ -17,11 +17,13 @@ export class EventoService {
     return this.http.get<Evento[]>(this.baseURL, { headers: this.tokenHeader });
   }
 
-  getEventosByTema() : Observable<Evento[]> {
-    return this.http.get<Evento[]>(this.baseURL, { headers: this.tokenHeader });
+  getEventosByTema(tema: string) : Observable<Evento[]> {
+    return this.http.get<Evento[]>(`${this.baseURL}/tema/${tema}`);
   }
 
-
+  getEventoById(id: number): Observable<Evento> {
+    return this.http.get<Evento>(`${this.baseURL}/${id}`);
+  }
 
 
 

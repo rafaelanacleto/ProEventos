@@ -52,7 +52,7 @@ public class EventoController : ControllerBase
         }
     }
 
-    [HttpGet("{tema}")]
+    [HttpGet("tema/{tema}")]
     public async Task<IActionResult> GetByTema(string tema)
     {
         try
