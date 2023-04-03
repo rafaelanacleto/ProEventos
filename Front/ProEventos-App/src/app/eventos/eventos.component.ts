@@ -53,6 +53,11 @@ export class EventosComponent implements OnInit {
     return this._filtroLista;
   }
 
+  public cleanFiltroLista() : any {
+    this._filtroLista = '';
+    this.getEventos();
+  }
+
   public set filtroLista(para : string) {
     this._filtroLista = para;
     this.eventosFiltrados = this._filtroLista ? this.filtrarEventos(this._filtroLista) : this.eventos;
