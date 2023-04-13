@@ -27,11 +27,11 @@ export class EventosComponent implements OnInit {
 
     this.eventoService.getAllEvento()
       .subscribe(
-        (response : Evento[]) => {
-          this.eventos = response,
-          this.eventosFiltrados = response
-        },
-        error => console.log(error)
+        {
+          next: (v) => this.eventos = v,
+          error: (e) => console.error(e),
+          complete: () => this.eventosFiltrados = this.eventos
+        }
       );
   }
 

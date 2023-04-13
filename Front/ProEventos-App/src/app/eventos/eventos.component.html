@@ -50,7 +50,7 @@
       <td>{{item.local}}</td>
       <td>{{item.dataEvento | date}}</td>
       <td>{{item.qtdPessoas}}</td>
-      <td>{{item.lote}}</td>
+      <td>{{item.lote[0].nome}}</td>
       <td>
         <button type="button" class="btn btn-primary btn-sm me-1"><i-bs name="pencil-square"></i-bs></button>
         <button type="button" class="btn btn-warning btn-sm me-1"><i-bs name="bookmark-plus"></i-bs></button>
@@ -66,3 +66,6 @@
     </tr>
   </tfoot>
 </table>
+
+
+{{eventosFiltrados[0].lote.nome | json}}

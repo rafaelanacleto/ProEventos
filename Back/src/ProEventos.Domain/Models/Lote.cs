@@ -5,7 +5,7 @@ namespace ProEventos.Domain.Models
     public class Lote
     {
         public int Id { get; set; }
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
         public decimal Preco { get; set; }
         public DateTime? DataIncio { get; set; }
         public DateTime? DataFim { get; set; }
