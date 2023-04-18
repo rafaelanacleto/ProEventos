@@ -9,8 +9,8 @@ import { EventoService } from '../services/evento.service';
 })
 export class EventosComponent implements OnInit {
 
-  public eventos: any = [];
-  public eventosFiltrados: any = [];
+  public eventos: Evento[] = [];
+  public eventosFiltrados: Evento[] = [];
   larguraImagem: number = 50;
   margemImagem: number = 0.5;
   mostrarImagem: boolean = false;
@@ -29,7 +29,7 @@ export class EventosComponent implements OnInit {
       .subscribe(
         {
           next: (v) => this.eventos = v,
-          error: (e) => console.error(e),
+          error: (e) => console.log(this.eventos),
           complete: () => this.eventosFiltrados = this.eventos
         }
       );
