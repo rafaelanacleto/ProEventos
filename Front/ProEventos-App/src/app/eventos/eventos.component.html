@@ -48,7 +48,7 @@
       <th scope="row">{{item.id}}</th>
       <td>{{item.tema}}</td>
       <td>{{item.local}}</td>
-      <td>{{item.dataEvento | date}}</td>
+      <td>{{item.dataEvento | DateTimeFormatPipe}}</td>
       <td>{{item.qtdPessoas}}</td>
       <td>{{item.lotes[0].nome | uppercase}}</td>
       <td>
