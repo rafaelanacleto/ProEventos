@@ -6,6 +6,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,7 +33,8 @@ import { DateTimeFormatPipePipe } from './helpers/DateTimeFormatPipe.pipe';
     FormsModule,
     NgxBootstrapIconsModule.pick(allIcons),
     TooltipModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
