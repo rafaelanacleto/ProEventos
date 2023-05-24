@@ -52,13 +52,8 @@ export class EventosComponent implements OnInit {
       );
   }
 
-  public onToggleImage(): any {
-
-    if (this.mostrarImagem) {
-      this.mostrarImagem = false;
-    }else {
-      this.mostrarImagem = true;
-    }
+  public onToggleImage(): void {
+    this.mostrarImagem = !this.mostrarImagem;
   }
 
   filtrarEventos(filtrarPor : string): any {
