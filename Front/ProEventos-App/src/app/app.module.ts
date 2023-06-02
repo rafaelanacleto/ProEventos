@@ -39,7 +39,12 @@ import { DateTimeFormatPipePipe } from './helpers/DateTimeFormatPipe.pipe';
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     CommonModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressAnimation: 'decreasing'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

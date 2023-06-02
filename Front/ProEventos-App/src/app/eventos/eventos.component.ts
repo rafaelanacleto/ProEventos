@@ -2,6 +2,7 @@ import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { Evento } from '../models/Evento';
 import { EventoService } from '../services/evento.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-eventos',
@@ -19,7 +20,9 @@ export class EventosComponent implements OnInit {
   modalRef?: BsModalRef;
   message?: string;
 
-  constructor(private eventoService: EventoService, private modalService: BsModalService) {
+  constructor(private eventoService: EventoService,
+              private modalService: BsModalService,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -28,6 +31,10 @@ export class EventosComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  showSuccess() {
+    this.toastr.success('Hello world!', 'Toastr fun!');
   }
 
   confirm(): void {
