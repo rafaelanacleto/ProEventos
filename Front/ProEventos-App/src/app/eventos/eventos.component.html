@@ -1,6 +1,15 @@
 <br>
 <h2>Eventos</h2>
 <br>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
 <form action="">
   <div class="row g-3">
     <div class="col-sm-8">
@@ -73,7 +82,7 @@
 <ng-template #template>
   <div class="modal-body text-center">
     <p>Você confirma a exclusão?</p>
-    <button type="button" class="btn btn-default" (click)="showSuccess()" >Sim</button>
-    <button type="button" class="btn btn-primary" (click)="showSuccess()" >Não</button>
+    <button type="button" class="btn btn-default" (click)="confirm()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">Não</button>
   </div>
 </ng-template>

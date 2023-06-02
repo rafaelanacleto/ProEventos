@@ -3,6 +3,7 @@ import { Evento } from '../models/Evento';
 import { EventoService } from '../services/evento.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-eventos',
@@ -22,10 +23,20 @@ export class EventosComponent implements OnInit {
 
   constructor(private eventoService: EventoService,
               private modalService: BsModalService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private spinner: NgxSpinnerService) {
   }
 
   ngOnInit() {
+
+    /** spinner starts on init */
+    this.spinner.show();
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 5000);
+
     this.getEventos();
   }
 
@@ -40,11 +51,13 @@ export class EventosComponent implements OnInit {
   confirm(): void {
     this.message = 'Confirmed!';
     this.modalRef?.hide();
+    this.toastr.success('O evento foi deletado com sucesso!', 'Deletado!');
   }
 
   decline(): void {
     this.message = 'Declined!';
     this.modalRef?.hide();
+    this.toastr.error('Exclusão Cancelada!', 'Informação');
   }
 
   public getEventos(): void {

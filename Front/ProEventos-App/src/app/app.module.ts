@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http'
@@ -9,7 +9,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,12 +40,15 @@ import { DateTimeFormatPipePipe } from './helpers/DateTimeFormatPipe.pipe';
     ModalModule.forRoot(),
     CommonModule,
     ToastrModule.forRoot({
-      timeOut: 2000,
+      timeOut: 2090,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-      progressAnimation: 'decreasing'
-    })
+      progressAnimation: 'decreasing',
+      progressBar: true
+    }),
+    NgxSpinnerModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })
