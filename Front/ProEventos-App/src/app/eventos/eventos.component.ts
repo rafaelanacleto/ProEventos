@@ -66,7 +66,7 @@ export class EventosComponent implements OnInit {
       .subscribe(
         {
           next: (v) => this.eventos = v,
-          error: (e) => console.log(this.eventos),
+          error: (e) => this.toastr.error('Erro ao buscar os Eventos!', 'Erro 500'),
           complete: () => this.eventosFiltrados = this.eventos
         }
       );
