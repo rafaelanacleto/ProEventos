@@ -19,6 +19,9 @@ import { NavComponent } from './nav/nav.component';
 import { FormControl, FormsModule } from '@angular/forms';
 import { DateTimeFormatPipePipe } from './helpers/DateTimeFormatPipe.pipe';
 import { TituloComponent } from './shared/titulo/titulo.component';
+import { ContatosComponent } from './components/contatos/contatos.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { TituloComponent } from './shared/titulo/titulo.component';
       PalestrantesComponent,
       NavComponent,
       DateTimeFormatPipePipe,
-      TituloComponent
+      TituloComponent,
+      ContatosComponent,
+      DashboardComponent,
+      PerfilComponent
    ],
   imports: [
     BrowserModule,
