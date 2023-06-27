@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { faFilm } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-titulo',
@@ -8,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TituloComponent implements OnInit {
 
   @Input() filtro : string = "title";
-
+  filmIcon = faFilm;
   constructor() { }
 
   ngOnInit() {
