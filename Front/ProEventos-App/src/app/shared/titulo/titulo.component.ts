@@ -9,6 +9,7 @@ import { faFilm } from '@fortawesome/free-solid-svg-icons';
 export class TituloComponent implements OnInit {
 
   @Input() filtro : string = "title";
+  @Input() botaoListar : boolean = false;
   filmIcon = faFilm;
   constructor() { }
 
