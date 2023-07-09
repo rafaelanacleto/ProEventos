@@ -25,12 +25,12 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col"><button type="button" (click)="onToggleImage()" class="btn btn-outline-info">
+        <th scope="col" class="d-none d-md-table-cell"><button type="button" (click)="onToggleImage()" class="btn btn-outline-info">
           {{!mostrarImagem ? 'Mostrar' : 'Ocultar'}}</button></th>
           <th scope="col">#</th>
           <th scope="col">Tema</th>
-          <th scope="col">Local</th>
-          <th scope="col">Data Evento</th>
+          <th scope="col" class="d-none d-md-table-cell">Local</th>
+          <th scope="col" class="d-none d-md-table-cell">Data Evento</th>
           <th scope="col">Qtd Pessoas</th>
           <th scope="col">Lote</th>
           <th scope="col">Opções</th>
@@ -38,7 +38,7 @@
       </thead>
       <tbody *ngIf="eventosFiltrados">
         <tr *ngFor="let item of eventosFiltrados; index as i; first as isFirst">
-          <td>
+          <td class="d-none d-md-table-cell">
             <div *ngIf="mostrarImagem">
               <img
               src="/assets/{{item.imagemURL}}"
@@ -50,8 +50,8 @@
           </td>
           <th scope="row">{{item.id}}</th>
           <td>{{item.tema}}</td>
-          <td>{{item.local}}</td>
-          <td>{{item.dataEvento | DateTimeFormatPipe}}</td>
+          <td class="d-none d-md-table-cell">{{item.local}}</td>
+          <td class="d-none d-md-table-cell">{{item.dataEvento | DateTimeFormatPipe}}</td>
           <td>{{item.qtdPessoas}}</td>
           <td>{{item.lotes[0]?.nome | uppercase}}</td>
           <td>
