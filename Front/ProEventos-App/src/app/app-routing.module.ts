@@ -8,7 +8,9 @@ import { EventoDetalhesComponent } from './components/eventos/evento-detalhes/ev
 import { EventoListaComponent } from './components/eventos/evento-lista/evento-lista.component';
 
 const routes: Routes = [
-  {
+  
+  {path: 'eventos', redirectTo: 'eventos/lista'},
+  {    
     path: 'eventos', component: EventosComponent,
     children: [
       { path: 'detalhe/:id' , component: EventoDetalhesComponent },
@@ -19,7 +21,9 @@ const routes: Routes = [
   { path: '', component: EventosComponent },
   { path: 'palestrantes', component: PalestrantesComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'contatos', component: ContatosComponent }
+  { path: 'contatos', component: ContatosComponent },
+  { path: '**', redirectTo: 'dashboard', pathMatch: 'full'},
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
 ];
 
 @NgModule({
