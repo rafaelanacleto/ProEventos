@@ -4,6 +4,7 @@ import { EventoService } from '../../../services/evento.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-evento-lista',
@@ -25,7 +26,8 @@ export class EventoListaComponent {
   constructor(private eventoService: EventoService,
               private modalService: BsModalService,
               private toastr: ToastrService,
-              private spinner: NgxSpinnerService) {
+              private spinner: NgxSpinnerService,
+              private router : Router) {
   }
 
   ngOnInit() {
@@ -59,6 +61,10 @@ export class EventoListaComponent {
     this.message = 'Declined!';
     this.modalRef?.hide();
     this.toastr.error('Exclusão Cancelada!', 'Informação');
+  }
+
+  detalheEvento(id : number) : void {
+    this.router.navigate([`eventos/detalhe/${id}`]);
   }
 
   public getEventos(): void {
