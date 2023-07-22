@@ -7,6 +7,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EventoDetalhesComponent } from './components/eventos/evento-detalhes/evento-detalhes.component';
 import { EventoListaComponent } from './components/eventos/evento-lista/evento-lista.component';
 import { LoginComponent } from './components/user/login/login.component';
+import { UserComponent } from './components/user/user.component';
+import { RegistrationComponent } from './components/user/registration/registration.component';
+import { PerfilComponent } from './components/user/perfil/perfil.component';
 
 const routes: Routes = [
   
@@ -20,11 +23,20 @@ const routes: Routes = [
     ]
   },
 
+  { 
+    path: 'user', component: UserComponent,
+    children: [
+      { path: 'login' , component: LoginComponent },
+      { path: 'registration' , component: RegistrationComponent }
+    ]
+  },
+  
   { path: 'login', component: LoginComponent },
   { path: '', component: EventosComponent },
   { path: 'palestrantes', component: PalestrantesComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'contatos', component: ContatosComponent },
+  { path: 'perfil', component: PerfilComponent },
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full'},
   { path: '', redirectTo: 'dashboard', pathMatch: 'full'}
 ];
