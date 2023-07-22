@@ -6,6 +6,7 @@ import { ContatosComponent } from './components/contatos/contatos.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EventoDetalhesComponent } from './components/eventos/evento-detalhes/evento-detalhes.component';
 import { EventoListaComponent } from './components/eventos/evento-lista/evento-lista.component';
+import { LoginComponent } from './components/user/login/login.component';
 
 const routes: Routes = [
   
@@ -18,6 +19,8 @@ const routes: Routes = [
       { path: 'lista' , component: EventoListaComponent }
     ]
   },
+
+  { path: 'login', component: LoginComponent },
   { path: '', component: EventosComponent },
   { path: 'palestrantes', component: PalestrantesComponent },
   { path: 'dashboard', component: DashboardComponent },
