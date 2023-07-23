@@ -27,6 +27,7 @@ const routes: Routes = [
     path: 'user', component: UserComponent,
     children: [
       { path: 'login' , component: LoginComponent },
+      { path: 'perfil' , component: PerfilComponent },
       { path: 'registration' , component: RegistrationComponent }
     ]
   },
@@ -36,7 +37,6 @@ const routes: Routes = [
   { path: 'palestrantes', component: PalestrantesComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'contatos', component: ContatosComponent },
-  { path: 'perfil', component: PerfilComponent },
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full'},
   { path: '', redirectTo: 'dashboard', pathMatch: 'full'}
 ];
