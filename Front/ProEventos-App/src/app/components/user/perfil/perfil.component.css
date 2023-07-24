@@ -1,3 +1,7 @@
 .ng-star-inserted {
     color: #323232;
   }
+ 
+.card-footer {
+  padding: 10px;
+}
