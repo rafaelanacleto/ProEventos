@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilComponent implements OnInit {
 
+  nome:string = 'Perfil';
   constructor() { }
 
   ngOnInit() {
