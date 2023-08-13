@@ -12,7 +12,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ToastrModule } from 'ngx-toastr';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContatosComponent } from './components/contatos/contatos.component';
@@ -53,6 +53,7 @@ import { RegistrationComponent } from './components/user/registration/registrati
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
     NgxBootstrapIconsModule.pick(allIcons),
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
