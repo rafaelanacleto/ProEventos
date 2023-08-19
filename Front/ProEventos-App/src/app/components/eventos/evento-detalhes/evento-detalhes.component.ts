@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+import { Evento } from 'src/app/models/Evento';
 
 @Component({
   selector: 'app-evento-detalhes',
@@ -8,34 +11,42 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class EventoDetalhesComponent implements OnInit {
 
-  form = new FormGroup({ 
-    local: new FormControl('', Validators.required),
-        dataEvento: new FormControl('', Validators.required), 
-        tema: new FormControl('', Validators.required),
-        qtdPessoas: new FormControl('', Validators.required),
-        imagemURL: new FormControl('', Validators.required),
-        telefone: new FormControl('', Validators.max(11)),
-        email: new FormControl('', [Validators.required, Validators.email])
-  });
 
-  constructor() { }
+  eventoId: number | undefined;
+  evento = {} as Evento;
+  form: any = FormGroup;
+  estadoSalvar = 'post';
+  file: File | undefined;
+
+  constructor(
+    private fb: FormBuilder,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService,
+  ) { }
 
   ngOnInit() {
+    this.validation();
   }
 
   public validation() : void {
 
-    this.form = new FormGroup(
+    this.form = this.fb.group(
       {
-        local: new FormControl('', Validators.required),
-        dataEvento: new FormControl(), 
-        tema: new FormControl(),
-        qtdPessoas: new FormControl(),
-        imagemURL: new FormControl(),
-        telefone: new FormControl(),
-        email: new FormControl()
+        local: ['', [Validators.required, Validators.minLength(5)]],
+        dataEvento: ['', Validators.required], 
+        tema: ['', Validators.required],
+        qtdPessoas: ['', Validators.required],
+        imagemURL: ['', Validators.required],
+        telefone: ['', Validators.required],
+        email: ['', Validators.required]
       }
     );
   }
+
+  public resetForm() : void {
+
+    this.form.reset();
+  }
+
 
 }
