@@ -20,12 +20,17 @@
                     [ngClass]="{'is-invalid': form.get('firstName')?.errors && form.get('firstName')?.touched}"
                      placeholder="Insira o Primeiro nome" />
                      <div class="invalid-feedback">
-                        First Name é obrigatório
+                         Primeiro Nome é obrigatório
                       </div>
                 </div>
                 <div class="form-group col-sm-6">
                     <label>Último nome</label>
-                    <input type="text" class="form-control" formControlName="lastName" placeholder="Insira o Último nome" />
+                    <input type="text" class="form-control" formControlName="lastName"
+                    [ngClass]="{'is-invalid': form.get('lastName')?.errors && form.get('lastName')?.touched}"
+                    placeholder="Insira o Último nome" />
+                    <div class="invalid-feedback">
+                      Ultimo Nome é obrigatório
+                   </div>
                 </div>
             </div>
             <div class="form-group">
@@ -67,6 +72,5 @@
                 </div>
             </div>
         </form>
-
     </div>
 </div>
