@@ -12,7 +12,7 @@ export interface Evento {
   imagemURL: string;
   telefone: string;
   email: string;
-  lotes: Lote[];
-  redesSociais: RedeSocial[];
-  palestrantesEventos: Palestrante[];
+  // lotes: Lote[];
+  // redesSociais: RedeSocial[];
+  // palestrantesEventos: Palestrante[];
 }

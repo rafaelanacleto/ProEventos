@@ -8,6 +8,7 @@ namespace ProEventos.Persistence.Repositories
          Task<Evento[]> GetAllEventoAsyncByTema(string tema, bool includePalestrante = false);
          Task<Evento[]> GetAllEventoAsync(bool includePalestrante);
          Task<Evento> GetAllEventoAsyncById(int EventoID, bool includePalestrante = false);
+         Task<Evento> GetEventoByIdAsync(int eventoId, bool includePalestrantes = false);
 
     }
 }

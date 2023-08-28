@@ -34,40 +34,6 @@ public class EventoController : ControllerBase
         }
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
-    {
-        try
-        {
-            var eventos = await _service.GetAllEventoAsyncById(id, true);
-            if (eventos == null) return NotFound("Nenhum Evento Encontrado.");
-
-            return Ok(eventos);
-        }
-        catch (Exception ex)
-        {
-            return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Erro ao tentar enviar o erro, ERRO: {ex.Message}");
-        }
-    }
-
-    [HttpGet("tema/{tema}")]
-    public async Task<IActionResult> GetByTema(string tema)
-    {
-        try
-        {
-            var eventos = await _service.GetAllEventoAsyncByTema(tema, true);
-            if (eventos == null) return NotFound("Nenhum Evento Encontrado.");
-
-            return Ok(eventos);
-        }
-        catch (Exception ex)
-        {
-            return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Erro ao tentar enviar o erro, ERRO: {ex.Message}");
-        }
-    }
-
     [HttpPost]
     public async Task<IActionResult> Post(EventoDto model)
     {
@@ -86,7 +52,7 @@ public class EventoController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, Evento model)
+    public async Task<IActionResult> Put(int id, EventoDto model)
     {
         try
         {
@@ -107,7 +73,7 @@ public class EventoController : ControllerBase
     {
         try
         {
-            var eventos = await _service.DeleteEvento(id, model);
+            var eventos = await _service.DeleteEvento(id);
             if (eventos == null) return BadRequest("Nenhum Evento Encontrado.");
 
             return Ok(eventos);

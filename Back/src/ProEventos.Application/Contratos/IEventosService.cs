@@ -7,11 +7,10 @@ namespace ProEventos.Application.Contratos
         //EVENTOS
         Task<EventoDto> AddEventos(EventoDto model);
         Task<EventoDto> UpdateEvento(int id, EventoDto model);
-        Task<bool> DeleteEvento(int id, EventoDto model);
+        Task<bool> DeleteEvento(int id);
 
-        Task<EventoDto[]> GetAllEventoAsyncByTema(string tema, bool includePalestrante = false);
         Task<EventoDto[]> GetAllEventoAsync(bool includePalestrante);
-        Task<EventoDto> GetAllEventoAsyncById(int EventoID, bool includePalestrante = false);
+        Task<EventoDto> GetEventoByIdAsync(int EventoID, bool includePalestrante = false);
 
     }
 }
