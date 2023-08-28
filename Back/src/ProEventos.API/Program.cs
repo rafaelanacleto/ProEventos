@@ -1,12 +1,11 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using ProEventos.Application;
+using ProEventos.Application.Contratos;
+using ProEventos.Application.Helpers;
 using ProEventos.Persistence;
 using ProEventos.Persistence.Context;
-using ProEventos.Application.Contratos;
-using ProEventos.Application;
 using ProEventos.Persistence.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
-using ProEventos.API.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
