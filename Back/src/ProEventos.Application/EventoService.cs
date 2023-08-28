@@ -1,4 +1,5 @@
 using ProEventos.Application.Contratos;
+using ProEventos.Application.Dtos;
 using ProEventos.Domain.Models;
 using ProEventos.Persistence.Repositories;
 
@@ -16,11 +17,11 @@ namespace ProEventos.Application
             this._geralPErsist = geralPErsist;
         }
 
-        public async Task<Evento> AddEventos(Evento model)
+        public async Task<EventoDto> AddEventos(EventoDto model)
         {
             try
             {
-                _geralPErsist.Add<Evento>(model);
+                _geralPErsist.Add<EventoDto>(model);
 
                 if (await _geralPErsist.SaveChangesAsync())
                 {
@@ -108,7 +109,7 @@ namespace ProEventos.Application
             }
         }
 
-        public async Task<Evento> UpdateEvento(int id, Evento model)
+        public async Task<Evento> UpdateEvento(int id, EventoDto model)
         {
             try
             {
