@@ -5,6 +5,8 @@ using ProEventos.Application.Contratos;
 using ProEventos.Application;
 using ProEventos.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using ProEventos.API.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,15 @@ builder.Services.AddDbContext<ProEventosContext>(con => con.UseSqlite(builder.Co
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//config automapper
+var config = new MapperConfiguration(cfg =>
+{
+    cfg.AddProfile(new ProEventosProfile());
+});
+
+IMapper mapper = config.CreateMapper();
+builder.Services.AddSingleton(mapper);   //services.AddSingleton(mapper);
 
 builder.Services.AddScoped<IEventosService, EventoService>();
 builder.Services.AddScoped<IGeralPersist, GeralPersistence>();
