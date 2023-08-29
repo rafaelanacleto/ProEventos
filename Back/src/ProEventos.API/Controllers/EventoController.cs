@@ -23,7 +23,7 @@ public class EventoController : ControllerBase
         try
         {
             var eventos = await _service.GetAllEventoAsync(true);
-            if (eventos == null) return NotFound("Nenhum Evento Encontrado.");
+            if (eventos == null) return NoContent();
 
             return Ok(eventos);
         }
@@ -40,7 +40,7 @@ public class EventoController : ControllerBase
         try
         {
             var evento = await _service.GetEventoByIdAsync(EventoId);
-            if (evento == null) return NotFound("Nenhum Evento Encontrado.");
+            if (evento == null) return NoContent();
 
             return Ok(evento);
 
