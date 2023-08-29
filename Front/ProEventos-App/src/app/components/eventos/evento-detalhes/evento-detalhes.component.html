@@ -29,7 +29,7 @@
         </div>
         <div class="form-group col-md-12">
           <label>Data e Hora</label>
-          <input type="datetime" class="form-control is-invalid" formControlName="dataEvento"
+          <input type="date" class="form-control is-invalid" formControlName="dataEvento"
           [ngClass]="{'is-invalid': form.get('dataEvento')?.errors && form.get('dataEvento')?.touched}"
           placeholder="">
           <div class="invalid-feedback">
@@ -40,14 +40,14 @@
       <div class="form-row">
         <div class="form-group col-md-12">
           <label>Qtd Pessoas</label>
-          <input type="text" class="form-control is-invalid" formControlName="qtdPessoas" 
+          <input type="number" class="form-control is-invalid" formControlName="qtdPessoas"
           [ngClass]="{'is-invalid': form.get('qtdPessoas')?.errors && form.get('qtdPessoas')?.touched}"
           placeholder="">
           <div class="invalid-feedback">
             Quantidade é obrigatório
           </div>
           <label>Imagem URL</label>
-          <input type="text" class="form-control is-invalid" formControlName="imagemURL" 
+          <input type="file" class="form-control is-invalid" formControlName="imagemURL"
           [ngClass]="{'is-invalid': form.get('imagemURL')?.errors && form.get('imagemURL')?.touched}"
           placeholder="">
           <div class="invalid-feedback">
@@ -56,7 +56,7 @@
         </div>
         <div class="form-group col-md-12">
           <label>Telefone</label>
-          <input type="text" class="form-control is-invalid" formControlName="telefone"
+          <input type="tel" class="form-control is-invalid" formControlName="telefone"
           [ngClass]="{'is-invalid': form.get('telefone')?.errors && form.get('telefone')?.touched}"
           placeholder="(000) 90000-0000">
           <div class="invalid-feedback">
@@ -65,7 +65,7 @@
         </div>
         <div class="form-group col-md-12">
           <label>Email</label>
-          <input type="text" class="form-control is-invalid" formControlName="email"
+          <input type="email" class="form-control is-invalid" formControlName="email"
           [ngClass]="{'is-invalid': form.get('email')?.errors && form.get('email')?.touched}"
           placeholder="e-mail">
           <div class="invalid-feedback">
@@ -88,5 +88,5 @@
       </div>
     </div>
   </form>
-  
+
 </div>
