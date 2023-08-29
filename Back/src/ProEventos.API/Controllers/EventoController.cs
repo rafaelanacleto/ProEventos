@@ -34,6 +34,24 @@ public class EventoController : ControllerBase
         }
     }
 
+    [HttpGet("{EventoId}")]
+    public async Task<IActionResult> GetById(int EventoId)
+    {
+        try
+        {
+            var evento = await _service.GetEventoByIdAsync(EventoId);
+            if (evento == null) return NotFound("Nenhum Evento Encontrado.");
+
+            return Ok(evento);
+
+        }
+         catch (Exception ex)
+        {
+            return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Erro ao tentar enviar o erro, ERRO: {ex.Message}");
+        }
+    }
+
     [HttpPost]
     public async Task<IActionResult> Post(EventoDto model)
     {
@@ -69,7 +87,7 @@ public class EventoController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id, Evento model)
+    public async Task<IActionResult> Delete(int id)
     {
         try
         {
