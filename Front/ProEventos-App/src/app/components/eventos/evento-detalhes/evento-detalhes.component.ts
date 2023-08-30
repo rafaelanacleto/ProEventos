@@ -11,7 +11,6 @@ import { Evento } from 'src/app/models/Evento';
 })
 export class EventoDetalhesComponent implements OnInit {
 
-
   eventoId: number | undefined;
   evento = {} as Evento;
   form: any = FormGroup;
@@ -28,9 +27,17 @@ export class EventoDetalhesComponent implements OnInit {
     this.validation();
   }
 
-
   get f(): any {
     return this.form.controls;
+  }
+
+  get bsConfig(): any {
+    return { 
+      adaptivePosition: true, 
+      dateInputFormat: 'DD/MM/YYYY hh:mm a',
+      containerClass: 'theme-default',
+      showWeekNumbers: false 
+    };
   }
 
   public validation() : void {

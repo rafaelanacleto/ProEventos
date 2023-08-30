@@ -30,7 +30,7 @@
         <div class="form-group col-md-12">
           <label>Data e Hora</label>
           <input type="text" class="form-control is-invalid" formControlName="dataEvento"
-          bsDatepicker [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD/MM/YYYY hh:mm a' }"
+          bsDatepicker [bsConfig]="bsConfig"
           [ngClass]="cssValidator(f.dataEvento)"
           placeholder="">
           <div class="invalid-feedback">
