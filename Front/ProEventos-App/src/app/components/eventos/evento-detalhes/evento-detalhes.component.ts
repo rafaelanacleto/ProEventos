@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Evento } from 'src/app/models/Evento';
@@ -16,14 +17,17 @@ export class EventoDetalhesComponent implements OnInit {
   form: any = FormGroup;
   estadoSalvar = 'post';
   file: File | undefined;
+  locale = 'pt-br';
 
   constructor(
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
+    private localeService: BsLocaleService
   ) { }
 
   ngOnInit() {
+    this.localeService.use(this.locale);
     this.validation();
   }
 
