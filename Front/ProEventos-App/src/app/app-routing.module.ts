@@ -12,9 +12,9 @@ import { RegistrationComponent } from './components/user/registration/registrati
 import { PerfilComponent } from './components/user/perfil/perfil.component';
 
 const routes: Routes = [
-  
+
   {path: 'eventos', redirectTo: 'eventos/lista'},
-  {    
+  {
     path: 'eventos', component: EventosComponent,
     children: [
       { path: 'detalhe/:id' , component: EventoDetalhesComponent },
@@ -23,7 +23,7 @@ const routes: Routes = [
     ]
   },
 
-  { 
+  {
     path: 'user', component: UserComponent,
     children: [
       { path: 'login' , component: LoginComponent },
@@ -31,8 +31,7 @@ const routes: Routes = [
       { path: 'registration' , component: RegistrationComponent }
     ]
   },
-  
-  { path: 'login', component: LoginComponent },
+
   { path: '', component: EventosComponent },
   { path: 'palestrantes', component: PalestrantesComponent },
   { path: 'dashboard', component: DashboardComponent },
