@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Evento } from 'src/app/models/Evento';
 import { DatePipe } from '@angular/common';
 import { EventoService } from './../../../services/evento.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -36,13 +36,22 @@ export class EventoDetalhesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.carregarEvento();
     this.localeService.use(this.locale);
     this.validation();
   }
 
   public carregarEvento(): void {
-    this.eventoId = +this.activatedRouter.snapshot.paramMap.get('id');
+
+    this.activatedRouter.params
+    .subscribe(
+      (params: Params) => {
+        this.eventoId = +params['id'];
+      }
+    );
+
+    // this.eventoId = 1; // +this.activatedRouter.snapshot.paramMap.get('id');
 
     if (this.eventoId !== null && this.eventoId !== 0) {
       this.spinner.show();
