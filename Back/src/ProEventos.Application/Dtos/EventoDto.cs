@@ -11,8 +11,8 @@ namespace ProEventos.Application.Dtos
         public int Id { get; set; }
         public string? Local { get; set; }
         public string? DataEvento { get; set; }
-        [Required(ErrorMessage = "o campo {0} é obrigatório.")]
-        [MinLength(3, ErrorMessage = "{0} deve ter no mínimo 4 caractere")]
+        [Required(ErrorMessage = "o campo {0} ï¿½ obrigatï¿½rio.")]
+        [MinLength(3, ErrorMessage = "{0} deve ter no mï¿½nimo 4 caractere")]
         public string? Tema { get; set; }
         public int QtdPessoas { get; set; }
         public string? Lote { get; set; }
@@ -21,8 +21,8 @@ namespace ProEventos.Application.Dtos
         public string? Telefone { get; set; }
         [EmailAddress]
         public string Email { get; set; }
-        public List<LoteDto> Lotes { get; set; }
-        public List<RedeSocialDto> RedesSociais { get; set; }
-        public List<PalestranteDto> Palestrantes { get; set; }
+        public List<LoteDto>? Lotes { get; set; }
+        public List<RedeSocialDto>? RedesSociais { get; set; }
+        public List<PalestranteDto>? Palestrantes { get; set; }
     }
 }

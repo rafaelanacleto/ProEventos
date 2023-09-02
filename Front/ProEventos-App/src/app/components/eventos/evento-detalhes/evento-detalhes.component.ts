@@ -37,6 +37,8 @@ export class EventoDetalhesComponent implements OnInit {
 
   ngOnInit() {
 
+    this.spinner.show();
+
     this.carregarEvento();
     this.localeService.use(this.locale);
     this.validation();
@@ -54,7 +56,6 @@ export class EventoDetalhesComponent implements OnInit {
     // this.eventoId = 1; // +this.activatedRouter.snapshot.paramMap.get('id');
 
     if (this.eventoId !== null && this.eventoId !== 0) {
-      this.spinner.show();
 
       this.estadoSalvar = 'put';
 
@@ -65,6 +66,7 @@ export class EventoDetalhesComponent implements OnInit {
             this.evento = { ...evento };
             this.form.patchValue(this.evento);
             console.log(this.evento.telefone);
+            this.spinner.show();
             // if (this.evento.imagemURL !== '') {
             //   this.imagemURL = environment.apiURL + 'resources/images/' + this.evento.imagemURL;
             // }
@@ -73,6 +75,9 @@ export class EventoDetalhesComponent implements OnInit {
           (error: any) => {
             this.toastr.error('Erro ao tentar carregar Evento.', 'Erro!');
             console.error(error);
+          },
+          (complete?: any) => {
+            this.spinner.hide();
           }
         )
         .add(() => this.spinner.hide());
@@ -100,7 +105,7 @@ export class EventoDetalhesComponent implements OnInit {
         dataEvento: ['', Validators.required],
         tema: ['', Validators.required],
         qtdPessoas: ['', Validators.required],
-        imagemURL: ['', Validators.required],
+        imagemURL: [''],
         telefone: ['', Validators.required],
         email: ['', Validators.required]
       }
@@ -114,6 +119,51 @@ export class EventoDetalhesComponent implements OnInit {
 
   public cssValidator(campoForm: FormControl | AbstractControl): any {
     return { 'is-invalid': campoForm.errors && campoForm.touched };
+  }
+
+  public salvarAlteracao(): void {
+
+    console.log("form: " + this.form.valid);
+
+    if (this.form.valid) {
+
+      this.evento = {... this.form.value};
+
+      this.eventoService.post(this.evento).subscribe(
+        (evento: Evento) => {
+
+          this.toastr.success("Evento salvo com sucesso", "Sucesso")
+
+        },
+        (error: any) => {
+          this.toastr.error('Erro ao tentar salvar Evento.', 'Erro!');
+          console.error(error);
+        },
+        (complete?: any) => {
+          this.spinner.hide();
+        }
+      );
+
+
+      this.eventoService.put(this.evento).subscribe(
+        (evento: Evento) => {
+
+          this.toastr.success("Evento salvo com sucesso", "Sucesso")
+
+        },
+        (error: any) => {
+          this.toastr.error('Erro ao tentar salvar Evento.', 'Erro!');
+          console.error(error);
+        },
+        (complete?: any) => {
+          this.spinner.hide();
+        }
+      );
+
+
+    }
+
+
   }
 
 

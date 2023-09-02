@@ -15,6 +15,7 @@ export class EventoListaComponent {
 
   nome:string = 'Eventos';
   public eventos: Evento[] = [];
+  public eventoId = 0;
   public eventosFiltrados: Evento[] = [];
   larguraImagem: number = 50;
   margemImagem: number = 0.5;
@@ -43,7 +44,10 @@ export class EventoListaComponent {
     this.getEventos();
   }
 
-  openModal(template: TemplateRef<any>) {
+  openModal(e: any, template: TemplateRef<any>, eventoId: number) {
+
+    e.stopPropagation();
+    this.eventoId = eventoId;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
@@ -54,11 +58,29 @@ export class EventoListaComponent {
   confirm(): void {
     this.message = 'Confirmed!';
     this.modalRef?.hide();
-    this.toastr.success('O evento foi deletado com sucesso!', 'Deletado!');
+
+    this.eventoService.deleteEvento(this.eventoId).subscribe({
+      next: (result) => {
+        if(result === true)
+        {
+          this.toastr.success('O evento foi deletado com sucesso!', 'Deletado!');
+          this.spinner.hide();
+          this.getEventos();
+        }
+      },
+      error: (v) => {
+        console.error(v);
+        this.toastr.error("Erro ao deletar ao ventro", "Erro Delete*");
+      },
+      complete: () => {}
+    })
+
+
+
   }
 
   decline(): void {
-    this.message = 'Declined!';
+    this.message = 'Deletado!';
     this.modalRef?.hide();
     this.toastr.error('Exclusão Cancelada!', 'Informação');
   }

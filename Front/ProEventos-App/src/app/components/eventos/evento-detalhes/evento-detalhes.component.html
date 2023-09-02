@@ -1,11 +1,13 @@
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+
 <div class="card rounded shadow-sm">
   <form [formGroup]="form">
-    <!-- <p>
+    <p>
       Form Value: {{form.value | json}}
       <br>
       Form Value: {{form.status | json}}
 
-    </p> -->
+    </p>
     <div class="p-3">
       <div class="form-row">
         <div class="form-group col-md-8">
@@ -47,7 +49,7 @@
           <div class="invalid-feedback">
             Quantidade é obrigatório
           </div>
-       
+
         </div>
         <div class="form-group col-md-8">
           <label>Telefone</label>
@@ -76,7 +78,7 @@
         </button>
         &nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;
-        <button class="btn btn-success" [disabled]="!form.valid">
+        <button class="btn btn-success" [disabled]="!form.valid" (click)="salvarAlteracao()">
           <span class="spinner-border spinner-border-sm mr-1"></span>
           Salvar Evento
         </button>
