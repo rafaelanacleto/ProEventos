@@ -8,7 +8,7 @@
     </p> -->
     <div class="p-3">
       <div class="form-row">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-8">
           <label>Tema</label>
           <input type="text" class="form-control"
           [ngClass]="cssValidator(f.tema)"
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-8">
           <label>Local</label>
           <input type="text" class="form-control is-invalid" formControlName="local" placeholder=""
           [ngClass]="cssValidator(f.local)"  >
@@ -27,7 +27,7 @@
             Local é obrigatório
           </div>
         </div>
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-8">
           <label>Data e Hora</label>
           <input type="text" class="form-control is-invalid" formControlName="dataEvento"
           bsDatepicker [bsConfig]="bsConfig"
@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-8">
           <label>Qtd Pessoas</label>
           <input type="number" class="form-control is-invalid" formControlName="qtdPessoas"
           [ngClass]="cssValidator(f.qtdPessoas)"
@@ -55,7 +55,7 @@
             Imagem é obrigatório
           </div>
         </div>
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-8">
           <label>Telefone</label>
           <input type="tel" class="form-control is-invalid" formControlName="telefone"
           [ngClass]="cssValidator(f.telefone)"
@@ -64,7 +64,7 @@
             Telefone é obrigatório
           </div>
         </div>
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-8">
           <label>Email</label>
           <input type="email" class="form-control is-invalid" formControlName="email"
           [ngClass]="cssValidator(f.email)"

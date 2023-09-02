@@ -64,9 +64,10 @@ export class EventoDetalhesComponent implements OnInit {
           (evento: Evento) => {
             this.evento = { ...evento };
             this.form.patchValue(this.evento);
-            if (this.evento.imagemURL !== '') {
-              this.imagemURL = environment.apiURL + 'resources/images/' + this.evento.imagemURL;
-            }
+            console.log(this.evento.telefone);
+            // if (this.evento.imagemURL !== '') {
+            //   this.imagemURL = environment.apiURL + 'resources/images/' + this.evento.imagemURL;
+            // }
            // this.carregarLotes();
           },
           (error: any) => {
