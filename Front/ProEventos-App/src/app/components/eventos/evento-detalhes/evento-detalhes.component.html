@@ -30,7 +30,7 @@
         <div class="form-group col-md-8">
           <label>Data e Hora</label>
           <input type="text" class="form-control is-invalid" formControlName="dataEvento"
-          bsDatepicker [bsConfig]="bsConfig"
+          bsDatepicker [bsConfig]="bsConfig" value="{{evento.dataEvento | DateFormatPipe}}"
           [ngClass]="cssValidator(f.dataEvento)"
           placeholder="">
           <div class="invalid-feedback">
@@ -47,13 +47,7 @@
           <div class="invalid-feedback">
             Quantidade é obrigatório
           </div>
-          <label>Imagem URL</label>
-          <input type="file" class="form-control is-invalid" formControlName="imagemURL"
-          [ngClass]="{'is-invalid': form.get('imagemURL')?.errors && form.get('imagemURL')?.touched}"
-          placeholder="">
-          <div class="invalid-feedback">
-            Imagem é obrigatório
-          </div>
+       
         </div>
         <div class="form-group col-md-8">
           <label>Telefone</label>
