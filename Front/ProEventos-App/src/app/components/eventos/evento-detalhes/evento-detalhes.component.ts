@@ -52,6 +52,7 @@ export class EventoDetalhesComponent implements OnInit {
     if (this.eventoId !== null && this.eventoId !== 0) {
 
       this.estadoSalvar = 'put';
+
       this.eventoService
         .getEventoById(this.eventoId)
         .subscribe(
@@ -108,46 +109,28 @@ export class EventoDetalhesComponent implements OnInit {
 
   public salvarAlteracao(): void {
 
-    console.log("form: " + this.form.valid);
-
     if (this.form.valid) {
 
-      if (this.estadoSalvar === 'post') {
+        this.evento =
+        this.estadoSalvar === 'post'
+          ? { ...this.form.value }
+          : { id: this.evento.id, ...this.form.value };
 
-        this.evento = {... this.form.value};
-        this.eventoService.post(this.evento).subscribe(
-          (evento: Evento) => {
+        console.log(this.estadoSalvar);
 
-            this.toastr.success("Evento salvo com sucesso", "Sucesso")
-
+        this.eventoService[this.estadoSalvar](this.evento).subscribe(
+          (eventoRetorno: Evento) => {
+            this.toastr.success('Evento salvo com Sucesso!', 'Sucesso');
+            this.router.navigate([`eventos/detalhe/${eventoRetorno.id}`]);
           },
           (error: any) => {
-            this.toastr.error('Erro ao tentar salvar Evento.', 'Erro!');
             console.error(error);
-          },
-          (complete?: any) => {
             this.spinner.hide();
-            this.router.navigate(['eventos/lista/']);
-          }
-        );
-      }else{
-        this.evento = {id: this.evento.id, ... this.form.value};
-        this.eventoService.put(this.evento).subscribe(
-          (evento: Evento) => {
-
-            this.toastr.success("Evento alterado com sucesso", "Sucesso");
-            this.router.navigate(['eventos/lista/']);
+            this.toastr.error('Error ao salvar evento', 'Erro');
           },
-          (error: any) => {
-            this.toastr.error('Erro ao tentar alterar Evento.', 'Erro!');
-            console.error(error);
-          },
-          (complete?: any) => {
-            this.spinner.hide();
-          }
+          () => this.spinner.hide()
         );
 
-      }
     }
 
   }

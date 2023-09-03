@@ -69,6 +69,13 @@
             Email é obrigatório
           </div>
         </div>
+        <div class="form-group col-md-8">
+          <label>Imagem</label>
+          <input type="text" class="form-control is-invalid" formControlName="imagemURL"
+          [ngClass]="cssValidator(f.imagemURL)"
+          placeholder="imagemURL">
+
+        </div>
       </div>
     </div>
     <div class="card-footer">
