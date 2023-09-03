@@ -33,12 +33,13 @@ export class EventoDetalhesComponent implements OnInit {
     private localeService: BsLocaleService,
     private activatedRouter: ActivatedRoute,
     private eventoService: EventoService,
+    private router: Router
   ) { }
 
   ngOnInit() {
 
     this.spinner.show();
-
+    this.spinner.hide();
     this.carregarEvento();
     this.localeService.use(this.locale);
     this.validation();
@@ -46,41 +47,25 @@ export class EventoDetalhesComponent implements OnInit {
 
   public carregarEvento(): void {
 
-    this.activatedRouter.params
-    .subscribe(
-      (params: Params) => {
-        this.eventoId = +params['id'];
-      }
-    );
-
-    // this.eventoId = 1; // +this.activatedRouter.snapshot.paramMap.get('id');
+    this.eventoId = +this.activatedRouter.snapshot.paramMap.get('id')!;
 
     if (this.eventoId !== null && this.eventoId !== 0) {
 
       this.estadoSalvar = 'put';
-
       this.eventoService
         .getEventoById(this.eventoId)
         .subscribe(
           (evento: Evento) => {
             this.evento = { ...evento };
             this.form.patchValue(this.evento);
-            console.log(this.evento.telefone);
-            this.spinner.show();
-            // if (this.evento.imagemURL !== '') {
-            //   this.imagemURL = environment.apiURL + 'resources/images/' + this.evento.imagemURL;
-            // }
-           // this.carregarLotes();
           },
           (error: any) => {
             this.toastr.error('Erro ao tentar carregar Evento.', 'Erro!');
             console.error(error);
           },
           (complete?: any) => {
-            this.spinner.hide();
           }
         )
-        .add(() => this.spinner.hide());
     }
   }
 
@@ -127,44 +112,44 @@ export class EventoDetalhesComponent implements OnInit {
 
     if (this.form.valid) {
 
-      this.evento = {... this.form.value};
+      if (this.estadoSalvar === 'post') {
 
-      this.eventoService.post(this.evento).subscribe(
-        (evento: Evento) => {
+        this.evento = {... this.form.value};
+        this.eventoService.post(this.evento).subscribe(
+          (evento: Evento) => {
 
-          this.toastr.success("Evento salvo com sucesso", "Sucesso")
+            this.toastr.success("Evento salvo com sucesso", "Sucesso")
 
-        },
-        (error: any) => {
-          this.toastr.error('Erro ao tentar salvar Evento.', 'Erro!');
-          console.error(error);
-        },
-        (complete?: any) => {
-          this.spinner.hide();
-        }
-      );
+          },
+          (error: any) => {
+            this.toastr.error('Erro ao tentar salvar Evento.', 'Erro!');
+            console.error(error);
+          },
+          (complete?: any) => {
+            this.spinner.hide();
+            this.router.navigate(['eventos/lista/']);
+          }
+        );
+      }else{
+        this.evento = {id: this.evento.id, ... this.form.value};
+        this.eventoService.put(this.evento).subscribe(
+          (evento: Evento) => {
 
+            this.toastr.success("Evento alterado com sucesso", "Sucesso");
+            this.router.navigate(['eventos/lista/']);
+          },
+          (error: any) => {
+            this.toastr.error('Erro ao tentar alterar Evento.', 'Erro!');
+            console.error(error);
+          },
+          (complete?: any) => {
+            this.spinner.hide();
+          }
+        );
 
-      this.eventoService.put(this.evento).subscribe(
-        (evento: Evento) => {
-
-          this.toastr.success("Evento salvo com sucesso", "Sucesso")
-
-        },
-        (error: any) => {
-          this.toastr.error('Erro ao tentar salvar Evento.', 'Erro!');
-          console.error(error);
-        },
-        (complete?: any) => {
-          this.spinner.hide();
-        }
-      );
-
-
+      }
     }
 
-
   }
-
 
 }
