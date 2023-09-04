@@ -29,8 +29,10 @@ IMapper mapper = config.CreateMapper();
 builder.Services.AddSingleton(mapper);   //services.AddSingleton(mapper);
 
 builder.Services.AddScoped<IEventosService, EventoService>();
+builder.Services.AddScoped<ILoteService, LoteService>();
 builder.Services.AddScoped<IGeralPersist, GeralPersistence>();
 builder.Services.AddScoped<IEventoPersist, EventoPersistence>();
+builder.Services.AddScoped<ILotePersist, LotePersist>();
 
 var app = builder.Build();
 
