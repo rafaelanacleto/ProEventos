@@ -22,5 +22,7 @@ namespace ProEventos.Persistence.Repositories
         /// <param name="id">Código chave da tabela Lote</param>
         /// <returns>Apenas 1 lote</returns>
         Task<Lote> GetLoteByIdsAsync(int eventoId, int id);
+
+        //alteracao
     }
 }
