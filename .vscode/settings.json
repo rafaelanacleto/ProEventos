@@ -1,4 +1,5 @@
 {
     "dotnet.defaultSolution": "Back/src/ProEventos.sln",
-    "dotnet.preferRuntimeFromSDK": false
+    "dotnet.preferRuntimeFromSDK": false,
+    "editor.fontFamily": "\"Fira Code\""
 }
