@@ -8,6 +8,8 @@ import { DatePipe } from '@angular/common';
 import { EventoService } from './../../../services/evento.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { Lote } from 'src/app/models/Lote';
+import { LoteService } from 'src/app/services/lote.service';
 
 @Component({
   selector: 'app-evento-detalhes',
@@ -33,7 +35,9 @@ export class EventoDetalhesComponent implements OnInit {
     private localeService: BsLocaleService,
     private activatedRouter: ActivatedRoute,
     private eventoService: EventoService,
-    private router: Router
+    private router: Router,
+    private loteService: LoteService,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit() {
@@ -70,6 +74,10 @@ export class EventoDetalhesComponent implements OnInit {
     }
   }
 
+  get lotes(): FormArray {
+    return this.form.get('lotes') as FormArray;
+  }
+
   get f(): any {
     return this.form.controls;
   }
@@ -94,7 +102,7 @@ export class EventoDetalhesComponent implements OnInit {
         imagemURL: [''],
         telefone: ['', Validators.required],
         email: ['', Validators.required],
-        lotes: []
+        lotes: this.fb.array([]),
       }
     );
   }
@@ -107,6 +115,24 @@ export class EventoDetalhesComponent implements OnInit {
   public cssValidator(campoForm: FormControl | AbstractControl): any {
     return { 'is-invalid': campoForm.errors && campoForm.touched };
   }
+
+  adicionarLote(): void {
+    this.lotes.push(this.criarLote({ id: 0 } as Lote));
+  }
+
+
+  criarLote(lote: Lote): FormGroup {
+    return this.fb.group({
+      id: [lote.id],
+      nome: [lote.nome, Validators.required],
+      quantidade: [lote.quantidade, Validators.required],
+      preco: [lote.preco, Validators.required],
+      dataInicio: [lote.dataInicio],
+      dataFim: [lote.dataFim],
+    });
+  }
+
+  
 
   public salvarAlteracao(): void {
 
