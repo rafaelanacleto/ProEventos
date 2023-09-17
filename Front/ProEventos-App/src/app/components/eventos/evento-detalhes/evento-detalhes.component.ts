@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -10,6 +10,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { Lote } from 'src/app/models/Lote';
 import { LoteService } from 'src/app/services/lote.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-evento-detalhes',
@@ -20,13 +21,14 @@ import { LoteService } from 'src/app/services/lote.service';
 export class EventoDetalhesComponent implements OnInit {
 
   eventoId: number = 0;
+  modalRef: BsModalRef;
   evento = {} as Evento;
   form: any = FormGroup;
   estadoSalvar = 'post';
   loteAtual = { id: 0, nome: '', indice: 0 };
   imagemURL = 'assets/img/upload.png';
   file: File | undefined;
-  locale = 'pt-br';
+  locale = 'en';
 
   constructor(
     private fb: FormBuilder,
@@ -36,6 +38,7 @@ export class EventoDetalhesComponent implements OnInit {
     private activatedRouter: ActivatedRoute,
     private eventoService: EventoService,
     private router: Router,
+    private modalService: BsModalService,
     private loteService: LoteService,
     private datePipe: DatePipe
   ) { }
@@ -85,7 +88,7 @@ export class EventoDetalhesComponent implements OnInit {
   get bsConfig(): any {
     return {
       adaptivePosition: true,
-      dateInputFormat: 'DD/MM/YYYY hh:mm a',
+      dateInputFormat: 'YYYY-MM-DD',
       containerClass: 'theme-default',
       showWeekNumbers: false
     };
@@ -112,6 +115,10 @@ export class EventoDetalhesComponent implements OnInit {
     this.form.reset();
   }
 
+  public retornaTituloLote(nome: string): string {
+    return nome === null || nome === '' ? 'Nome do lote' : nome;
+  }
+
   public cssValidator(campoForm: FormControl | AbstractControl): any {
     return { 'is-invalid': campoForm.errors && campoForm.touched };
   }
@@ -132,7 +139,39 @@ export class EventoDetalhesComponent implements OnInit {
     });
   }
 
-  
+  public removerLote(template: TemplateRef<any>, indice: number): void {
+    this.loteAtual.id = this.lotes.get(indice + '.id').value;
+    this.loteAtual.nome = this.lotes.get(indice + '.nome').value;
+    this.loteAtual.indice = indice;
+
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+
+  confirmDeleteLote(): void {
+    this.modalRef.hide();
+    this.spinner.show();
+
+    this.loteService
+      .deleteLote(this.eventoId, this.loteAtual.id)
+      .subscribe(
+        () => {
+          this.toastr.success('Lote deletado com sucesso', 'Sucesso');
+          this.lotes.removeAt(this.loteAtual.indice);
+        },
+        (error: any) => {
+          this.toastr.error(
+            `Erro ao tentar deletar o Lote ${this.loteAtual.id}`,
+            'Erro'
+          );
+          console.error(error);
+        }
+      )
+      .add(() => this.spinner.hide());
+  }
+
+  declineDeleteLote(): void {
+    this.modalRef.hide();
+  }
 
   public salvarAlteracao(): void {
 
