@@ -56,6 +56,23 @@ export class EventoDetalhesComponent implements OnInit {
     return this.estadoSalvar === 'put';
   }
 
+  public carregarLotes(): void {
+    this.loteService
+      .getLotesByEventoId(this.eventoId)
+      .subscribe(
+        (lotesRetorno: Lote[]) => {
+          lotesRetorno.forEach((lote) => {
+            this.lotes.push(this.criarLote(lote));
+          });
+        },
+        (error: any) => {
+          this.toastr.error('Erro ao tentar carregar lotes', 'Erro');
+          console.error(error);
+        }
+      )
+      .add(() => this.spinner.hide());
+  }
+
   public carregarEvento(): void {
 
     this.eventoId = +this.activatedRouter.snapshot.paramMap.get('id')!;
@@ -70,6 +87,7 @@ export class EventoDetalhesComponent implements OnInit {
           (evento: Evento) => {
             this.evento = { ...evento };
             this.form.patchValue(this.evento);
+            this.carregarLotes();
           },
           (error: any) => {
             this.toastr.error('Erro ao tentar carregar Evento.', 'Erro!');
