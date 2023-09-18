@@ -96,8 +96,7 @@
 </div>
 
 <!-- Lote -->
-
-<div class="card rounded shadow-sm mt-4">
+<div class="card rounded shadow-sm mt-3" *ngIf="modoEditar">
   <div class="p-3">
     <div class="d-flex border-bottom">
       <h2 class="mr-auto">
@@ -109,18 +108,16 @@
     </div>
     <p>Clique em Lote para adicionar e preencher novos Lotes</p>
     <div class="form-row p-1">
-      <div class="col">
-        <div>
-          <fieldset class="form-group">
+      <div [formGroup]="form" class="col">
+        <div formArrayName="lotes" *ngFor="let lote of lotes.controls; let i=index">
+          <fieldset [formGroupName]="i" class="form-group">
             <legend class="d-flex justify-content-between capitalize">
-              <button class="p-2 btn btn-sm btn-outline-warning mb-1 d-flex"
-                tooltip="Excluir Lote"
-                [adaptivePosition]="false"
-                [delay]="500"
-                placement="left">
-              <i class="fa fa-window-close my-1"></i>
-              <b class="ml-1 d-none d-sm-block">Excluir</b>
-            </button>
+              {{ retornaTituloLote(lotes.get(i+'.nome').value) }}
+                  <button (click)="removerLote(template, i)" class="p-2 btn btn-sm btn-outline-warning mb-1 d-flex" tooltip="Excluir Lote"
+                  [adaptivePosition]="false" [delay]="500" placement="left">
+                  <i class="fa fa-window-close my-1"></i>
+                  <b class="ml-1 d-none d-sm-block">Excluir</b>
+                </button>
           </legend>
           <div class="row">
             <div class="form-group col-md-4">
@@ -164,3 +161,13 @@
   </div>
 </div>
 </div>
+
+<br>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Tem certeza que quer deletar o lote {{this.loteAtual.nome}}?</p>
+    <button type="button" class="btn btn-default" (click)="confirmDeleteLote()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="declineDeleteLote()">Não</button>
+  </div>
+</ng-template>
