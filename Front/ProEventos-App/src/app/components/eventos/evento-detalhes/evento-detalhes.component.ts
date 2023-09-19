@@ -20,25 +20,25 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 })
 export class EventoDetalhesComponent implements OnInit {
 
-  modalRef: BsModalRef;
   eventoId: number = 0;
+  modalRef: BsModalRef;
   evento = {} as Evento;
   form: any = FormGroup;
   estadoSalvar = 'post';
   loteAtual = { id: 0, nome: '', indice: 0 };
   imagemURL = 'assets/img/upload.png';
   file: File | undefined;
-  locale = 'pt-br';
+  locale = 'en';
 
   constructor(
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
     private localeService: BsLocaleService,
-    private modalService: BsModalService,
     private activatedRouter: ActivatedRoute,
     private eventoService: EventoService,
     private router: Router,
+    private modalService: BsModalService,
     private loteService: LoteService,
     private datePipe: DatePipe
   ) { }
@@ -110,7 +110,7 @@ export class EventoDetalhesComponent implements OnInit {
   get bsConfig(): any {
     return {
       adaptivePosition: true,
-      dateInputFormat: 'DD/MM/YYYY hh:mm a',
+      dateInputFormat: 'YYYY-MM-DD',
       containerClass: 'theme-default',
       showWeekNumbers: false
     };
