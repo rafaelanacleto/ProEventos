@@ -50,7 +50,7 @@
           <th scope="row">{{item.id}}</th>
           <td>{{item.tema}}</td>
           <td class="d-none d-md-table-cell">{{item.local}}</td>
-          <td class="d-none d-md-table-cell">{{item.dataEvento | date:"MMM dd, yyyy 'at' hh:mm a" }}</td>
+          <td class="d-none d-md-table-cell">{{item.dataEvento | DateFormatPipe}}</td>
           <td>{{item.qtdPessoas}}</td>
           <td class="d-none d-md-table-cell">{{item.lotes[0]?.nome | uppercase}}</td>
           <td class="d-none d-md-table-cell">{{item.telefone}}</td>

@@ -48,7 +48,7 @@ export class EventoDetalhesComponent implements OnInit {
     this.spinner.show();
     this.spinner.hide();
     this.carregarEvento();
-    this.localeService.use(this.locale);
+    this.localeService.use('pt-br');
     this.validation();
   }
 
@@ -110,9 +110,9 @@ export class EventoDetalhesComponent implements OnInit {
   get bsConfig(): any {
     return {
       adaptivePosition: true,
-      dateInputFormat: 'YYYY-MM-DD',
+      dateInputFormat: 'DD/MM/YYYY hh:mm a',
       containerClass: 'theme-default',
-      showWeekNumbers: false
+      showWeekNumbers: false,
     };
   }
 

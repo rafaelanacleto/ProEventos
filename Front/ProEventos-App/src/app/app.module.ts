@@ -13,7 +13,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { ToastrModule } from 'ngx-toastr';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
-import { defineLocale } from 'ngx-bootstrap/chronos';
+import { defineLocale, ptBrLocale } from 'ngx-bootstrap/chronos';
 import { enGbLocale } from 'ngx-bootstrap/locale';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -33,25 +33,25 @@ import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { RegistrationComponent } from './components/user/registration/registration.component';
 
-defineLocale('en', enGbLocale);
+defineLocale('pt-br', ptBrLocale);
 
 @NgModule({
   declarations: [
     AppComponent,
-      EventosComponent,
-      PalestrantesComponent,
-      NavComponent,
-      DateTimeFormatPipe,
-      TituloComponent,
-      ContatosComponent,
-      DashboardComponent,
-      PerfilComponent,
-      EventoDetalhesComponent,
-      EventoListaComponent,
-      UserComponent,
-      LoginComponent,
-      RegistrationComponent
-   ],
+    EventosComponent,
+    PalestrantesComponent,
+    NavComponent,
+    DateTimeFormatPipe,
+    TituloComponent,
+    ContatosComponent,
+    DashboardComponent,
+    PerfilComponent,
+    EventoDetalhesComponent,
+    EventoListaComponent,
+    UserComponent,
+    LoginComponent,
+    RegistrationComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
