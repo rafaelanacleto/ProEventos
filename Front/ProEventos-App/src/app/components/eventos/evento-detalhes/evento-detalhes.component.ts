@@ -52,6 +52,27 @@ export class EventoDetalhesComponent implements OnInit {
     this.validation();
   }
 
+  get modoEditar(): boolean {
+    return this.estadoSalvar === 'put';
+  }
+
+  public carregarLotes(): void {
+    this.loteService
+      .getLotesByEventoId(this.eventoId)
+      .subscribe(
+        (lotesRetorno: Lote[]) => {
+          lotesRetorno.forEach((lote) => {
+            this.lotes.push(this.criarLote(lote));
+          });
+        },
+        (error: any) => {
+          this.toastr.error('Erro ao tentar carregar lotes', 'Erro');
+          console.error(error);
+        }
+      )
+      .add(() => this.spinner.hide());
+  }
+
   public carregarEvento(): void {
 
     this.eventoId = +this.activatedRouter.snapshot.paramMap.get('id')!;
@@ -66,6 +87,7 @@ export class EventoDetalhesComponent implements OnInit {
           (evento: Evento) => {
             this.evento = { ...evento };
             this.form.patchValue(this.evento);
+            this.carregarLotes();
           },
           (error: any) => {
             this.toastr.error('Erro ao tentar carregar Evento.', 'Erro!');
@@ -110,13 +132,25 @@ export class EventoDetalhesComponent implements OnInit {
     );
   }
 
-  public resetForm() : void {
-
-    this.form.reset();
+  public mudarValorData(value: Date, indice: number, campo: string): void {
+    this.lotes.value[indice][campo] = value;
   }
 
   public retornaTituloLote(nome: string): string {
     return nome === null || nome === '' ? 'Nome do lote' : nome;
+  }
+
+  public removerLote(template: TemplateRef<any>, indice: number): void {
+    this.loteAtual.id = this.lotes.get(indice + '.id').value;
+    this.loteAtual.nome = this.lotes.get(indice + '.nome').value;
+    this.loteAtual.indice = indice;
+
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+
+  public resetForm() : void {
+
+    this.form.reset();
   }
 
   public cssValidator(campoForm: FormControl | AbstractControl): any {
@@ -137,14 +171,6 @@ export class EventoDetalhesComponent implements OnInit {
       dataInicio: [lote.dataInicio],
       dataFim: [lote.dataFim],
     });
-  }
-
-  public removerLote(template: TemplateRef<any>, indice: number): void {
-    this.loteAtual.id = this.lotes.get(indice + '.id').value;
-    this.loteAtual.nome = this.lotes.get(indice + '.nome').value;
-    this.loteAtual.indice = indice;
-
-    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
   confirmDeleteLote(): void {

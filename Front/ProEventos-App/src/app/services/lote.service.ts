@@ -26,6 +26,10 @@ export class LoteService {
     return this.http.get<Lote>(`${this.baseURL}/${id}`);
   }
 
+  public getLotesByEventoId(eventoId: number): Observable<Lote[]> {
+    return this.http.get<Lote[]>(`${this.baseURL}/${eventoId}`).pipe(take(1));
+  }
+
   public put(eventoId: number  ,lote: Lote[]): Observable<Lote[]> {
     return this.http
       .put<Lote[]>(`${this.baseURL}/${eventoId}`, lote)
