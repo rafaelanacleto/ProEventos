@@ -11,6 +11,7 @@ import { environment } from '../../../environments/environment';
 import { Lote } from 'src/app/models/Lote';
 import { LoteService } from 'src/app/services/lote.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Constants } from '../../../util/constants';
 
 @Component({
   selector: 'app-evento-detalhes',
@@ -161,6 +162,24 @@ export class EventoDetalhesComponent implements OnInit {
     this.lotes.push(this.criarLote({ id: 0 } as Lote));
   }
 
+   public salvarLotes(): void {
+    if (this.form.controls.lotes.valid) {
+      this.spinner.show();
+      this.loteService
+        .saveLote(this.eventoId, this.form.value.lotes)
+        .subscribe(
+          () => {
+            this.toastr.success('Lotes salvos com Sucesso!', 'Sucesso!');
+          },
+          (error: any) => {
+            this.toastr.error('Erro ao tentar salvar lotes.', 'Erro');
+            console.error(error);
+          }
+        )
+        .add(() => this.spinner.hide());
+    }
+  }
+
 
   criarLote(lote: Lote): FormGroup {
     return this.fb.group({
@@ -168,7 +187,7 @@ export class EventoDetalhesComponent implements OnInit {
       nome: [lote.nome, Validators.required],
       quantidade: [lote.quantidade, Validators.required],
       preco: [lote.preco, Validators.required],
-      dataInicio: [lote.dataInicio],
+      dataIncio: [lote.dataIncio],
       dataFim: [lote.dataFim],
     });
   }

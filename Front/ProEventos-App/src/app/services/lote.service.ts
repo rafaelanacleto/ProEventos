@@ -17,6 +17,11 @@ export class LoteService {
 
   constructor(private http: HttpClient) {}
 
+  public saveLote(eventoId: number, lotes: Lote[]): Observable<Lote[]> {
+    return this.http
+      .put<Lote[]>(`${this.baseURL}/${eventoId}`, lotes)
+      .pipe(take(1));
+  }
 
   getAllLote(): Observable<Lote[]> {
     return this.http.get<Lote[]>(this.baseURL, { headers: this.tokenHeader });
