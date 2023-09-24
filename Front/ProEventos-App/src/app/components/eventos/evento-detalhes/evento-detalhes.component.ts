@@ -219,7 +219,6 @@ export class EventoDetalhesComponent implements OnInit {
   }
 
 
-
   onFileChange(ev: any): void {
     const reader = new FileReader();
 
