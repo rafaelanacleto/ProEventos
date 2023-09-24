@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using ProEventos.API.Helpers;
 using ProEventos.Application;
 using ProEventos.Application.Contratos;
 using ProEventos.Application.Helpers;
@@ -33,6 +34,7 @@ builder.Services.AddScoped<ILoteService, LoteService>();
 builder.Services.AddScoped<IGeralPersist, GeralPersistence>();
 builder.Services.AddScoped<IEventoPersist, EventoPersistence>();
 builder.Services.AddScoped<ILotePersist, LotePersist>();
+builder.Services.AddScoped<IUtil, Util>();
 
 var app = builder.Build();
 
