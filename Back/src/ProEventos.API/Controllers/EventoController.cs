@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProEventos.Application.Contratos;
 using ProEventos.Application.Dtos;
 using ProEventos.Domain.Models;
+using ProEventos.API.Helpers;
 
 namespace ProEventos.API.Controllers;
 
@@ -11,10 +12,13 @@ public class EventoController : ControllerBase
 {
 
     private readonly IEventosService _service;
+    private readonly IUtil _util;
+    private readonly string _destino = "Images";
 
-    public EventoController(IEventosService service)
+    public EventoController(IEventosService service,  IUtil util)
     {
         _service = service;
+         _util = util;
     }
 
     [HttpGet]
@@ -33,6 +37,31 @@ public class EventoController : ControllerBase
                 $"Erro ao tentar enviar o erro, ERRO: {ex.Message}");
         }
     }
+
+    //    [HttpPost("upload-image/{eventoId}")]
+    //     public async Task<IActionResult> UploadImage(int eventoId)
+    //     {
+    //         try
+    //         {
+    //             var evento = await _eventoService.GetEventoByIdAsync(User.GetUserId(), eventoId, true);
+    //             if (evento == null) return NoContent();
+
+    //             var file = Request.Form.Files[0];
+    //             if (file.Length > 0)
+    //             {
+    //                 _util.DeleteImage(evento.ImagemURL, _destino);
+    //                 evento.ImagemURL = await _util.SaveImage(file, _destino);
+    //             }
+    //             var EventoRetorno = await _eventoService.UpdateEvento(User.GetUserId(), eventoId, evento);
+
+    //             return Ok(EventoRetorno);
+    //         }
+    //         catch (Exception ex)
+    //         {
+    //             return this.StatusCode(StatusCodes.Status500InternalServerError,
+    //                 $"Erro ao tentar realizar upload de foto do evento. Erro: {ex.Message}");
+    //         }
+    //     }
 
     [HttpGet("{EventoId}")]
     public async Task<IActionResult> GetById(int EventoId)
