@@ -14,6 +14,7 @@ namespace ProEventos.Persistence
         public LotePersist(ProEventosContext context)
         {
             _context = context;
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         public async Task<Lote> GetLoteByIdsAsync(int eventoId, int id)
