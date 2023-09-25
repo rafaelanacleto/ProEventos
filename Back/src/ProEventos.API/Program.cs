@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using ProEventos.API.Helpers;
 using ProEventos.Application;
 using ProEventos.Application.Contratos;
@@ -53,6 +54,13 @@ app.UseCors(
         .AllowAnyMethod()
         .AllowAnyOrigin()
 );
+
+
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Resources")),
+    RequestPath = new PathString("/Resources")
+});
 
 app.UseAuthorization();
 

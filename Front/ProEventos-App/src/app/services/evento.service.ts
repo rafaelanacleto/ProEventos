@@ -45,7 +45,7 @@ export class EventoService {
   }
 
   postUpload(eventoId: number, file: File): Observable<Evento> {
-    const fileToUpload = file as File;
+    const fileToUpload = <File>file[0];
     const formData = new FormData();
     formData.append('file', fileToUpload);
 

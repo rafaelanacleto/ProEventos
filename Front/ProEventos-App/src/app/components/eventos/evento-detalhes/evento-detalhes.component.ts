@@ -231,7 +231,7 @@ export class EventoDetalhesComponent implements OnInit {
   }
 
   uploadImagem(): void {
-    this.spinner.show();
+    this.spinner.show();  
     this.eventoService.postUpload(this.eventoId, this.file).subscribe(
       () => {
         this.carregarEvento();
