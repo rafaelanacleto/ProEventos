@@ -5,6 +5,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
+import { environment } from 'src/app/environments/environment';
 
 @Component({
   selector: 'app-evento-lista',
@@ -20,6 +21,7 @@ export class EventoListaComponent {
   larguraImagem: number = 50;
   margemImagem: number = 0.5;
   mostrarImagem: boolean = false;
+  public exibirImagem = true;
   private _filtroLista : string = '';
   modalRef?: BsModalRef;
   message?: string;
@@ -29,6 +31,16 @@ export class EventoListaComponent {
               private toastr: ToastrService,
               private spinner: NgxSpinnerService,
               private router : Router) {
+  }
+
+  public alterarImagem(): void {
+    this.exibirImagem = !this.exibirImagem;
+  }
+
+  public mostraImagem(imagemURL: string): string {
+    return imagemURL !== ''
+      ? `${environment.apiURL}Resources/Images/${imagemURL}`
+      : 'assets/img/semImagem.jpeg';
   }
 
   ngOnInit() {
