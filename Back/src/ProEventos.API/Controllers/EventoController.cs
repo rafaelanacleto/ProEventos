@@ -120,10 +120,18 @@ public class EventoController : ControllerBase
     {
         try
         {
-            var eventos = await _service.DeleteEvento(id);
-            if (eventos == null) return BadRequest("Nenhum Evento Encontrado.");
+             var evento = await _service.GetEventoByIdAsync(id, true);
+                if (evento == null) return NoContent();
 
-            return Ok(eventos);
+                if (await _service.DeleteEvento(id))
+                {
+                    _util.DeleteImage(evento.ImagemURL, _destino);
+                    return Ok(new { message = "Deletado" });
+                }
+                else
+                {
+                    throw new Exception("Ocorreu um problem não específico ao tentar deletar Evento.");
+                }
         }
         catch (Exception ex)
         {

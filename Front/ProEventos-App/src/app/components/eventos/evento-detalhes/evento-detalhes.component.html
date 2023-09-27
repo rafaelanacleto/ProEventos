@@ -1,5 +1,4 @@
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
-
 <div class="card rounded shadow-sm">
   <form [formGroup]="form">
     <!-- <p>
@@ -7,7 +6,6 @@
       <br />
       Form Value: {{ form.status | json }}
     </p> -->
-
     <div class="container">
       <div class="row">
         <div class="col-sm">
@@ -67,15 +65,15 @@
           <div [formGroup]="form" class="card-evento-view shadow-sm">
             <div class="form-row">
               <div class="form-group m-0">
-                <input type="file" #file (change)="onFileChange($event)" class="form-control is-invalid"
-                  placeholder="" style="display: none">
+                <input type="file" #file (change)="onFileChange($event)" class="form-control is-invalid" placeholder=""
+                  style="display: none">
               </div>
             </div>
             <div class="card profile-card-2">
               <div class="card-img-block">
-                <img class="image" [src]="imagemURL" class="img-thumbnail rounded d-block" (click)="file.click()" alt="Card image cap"
-                style="max-width: 75% !important;"
-                  tooltip="Uplaod de Nova Imagem" [adaptivePosition]="false" placement="bottom" />
+                <img class="image" [src]="imagemURL" class="img-thumbnail rounded d-block" (click)="file.click()"
+                  alt="Card image cap" style="max-width: 75% !important;" tooltip="Uplaod de Nova Imagem"
+                  [adaptivePosition]="false" placement="bottom" />
               </div>
               <div class="card-body pt-3">
                 <h4>{{evento.tema}}</h4>
@@ -111,7 +109,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="card-footer">
       <div class="d-flex">
         <button class="btn btn-outline-secondary mr-auto border" (click)="resetForm()">
@@ -194,10 +192,7 @@
 
 <!-- modal template -->
 
-
-
 <br />
-
 <ng-template #template>
   <div class="modal-body text-center">
     <p>Tem certeza que quer deletar o lote {{ this.loteAtual.nome }}?</p>
