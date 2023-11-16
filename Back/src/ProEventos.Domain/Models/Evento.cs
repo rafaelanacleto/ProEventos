@@ -15,6 +15,7 @@ namespace ProEventos.Domain.Models
         public int QtdPessoas { get; set; }
         public string? Lote { get; set; }
         public string? ImagemURL { get; set; }
+        public int UserId { get; set; }
         public User User { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
